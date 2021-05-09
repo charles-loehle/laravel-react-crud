@@ -8,10 +8,8 @@ if (document.getElementById("root")) {
     ReactDOM.render(
         <BrowserRouter>
             <Switch>
-                <React.StrictMode>
-                    <Route exact path="/:id/edit" component={TaskEdit} />
-                    <App />
-                </React.StrictMode>
+                <Route exact path="/:id/edit" component={TaskEdit} />
+                <App />
             </Switch>
         </BrowserRouter>,
         document.getElementById("root")
