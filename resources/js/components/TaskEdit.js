@@ -47,7 +47,7 @@ const TaskEdit = ({ match }) => {
                 <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div className="md:grid md:grid-cols-3 md:gap-6">
                         <div className="px-6 pt-6 bg-white">
-                            Edit A Task for id:{id}
+                            Edit Task id:{id}
                         </div>
                         <div className="md:mt-0 md:col-span-2">
                             <form onSubmit={handleSubmit}>

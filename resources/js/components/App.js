@@ -43,6 +43,13 @@ const App = () => {
             .then(setTasks(tasks.filter((task) => task.id !== id)));
     };
 
+    const handleDuplicate = (id) => {
+        axios.post(`/tasks/${id}/replicateRecord`).then((res) => {
+            console.log("handleDuplicate", res.data);
+            setTasks([...tasks, res.data]);
+        });
+    };
+
     return (
         <div className="py-12">
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -84,6 +91,7 @@ const App = () => {
                             <hr />
                             <Tasks
                                 handleDelete={handleDelete}
+                                handleDuplicate={handleDuplicate}
                                 allTasks={tasks}
                             />
                         </div>

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 
-const Tasks = ({ allTasks, handleDelete }) => {
+const Tasks = ({ allTasks, handleDelete, handleDuplicate }) => {
     const sorted = allTasks.sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
     );
-    console.log(sorted[0]);
+    //console.log(sorted[0]);
     return (
         <div className="Tasks p-4">
             {sorted.map((task) => (
@@ -33,6 +33,12 @@ const Tasks = ({ allTasks, handleDelete }) => {
                         className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >
                         Delete
+                    </button>
+                    <button
+                        onClick={() => handleDuplicate(task.id)}
+                        className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        Duplicate
                     </button>
                 </div>
             ))}

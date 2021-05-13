@@ -56,6 +56,16 @@ class TaskController extends Controller
 		return response()->json($task->with('user')->find($task->id));
     }
 
+    public function replicateRecord($id) {
+        // find the task by id
+        $task = Task::findOrFail($id);
+        $newTask = $task->replicate();
+        $newTask->save();
+
+        		// return task with user object
+		return response()->json($newTask->with('user')->find($newTask->id));
+    }
+
     /**
      * Display the specified resource.
      *

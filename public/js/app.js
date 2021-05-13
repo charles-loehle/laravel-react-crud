@@ -4028,6 +4028,13 @@ var App = function App() {
     })));
   };
 
+  var handleDuplicate = function handleDuplicate(id) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post("/tasks/".concat(id, "/replicateRecord")).then(function (res) {
+      console.log("handleDuplicate", res.data);
+      setTasks([].concat(_toConsumableArray(tasks), [res.data]));
+    });
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
     className: "py-12",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
@@ -4074,6 +4081,7 @@ var App = function App() {
               })
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Tasks__WEBPACK_IMPORTED_MODULE_2__.default, {
               handleDelete: handleDelete,
+              handleDuplicate: handleDuplicate,
               allTasks: tasks
             })]
           })]
@@ -4184,7 +4192,7 @@ var TaskEdit = function TaskEdit(_ref) {
           className: "md:grid md:grid-cols-3 md:gap-6",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
             className: "px-6 pt-6 bg-white",
-            children: ["Edit A Task for id:", id]
+            children: ["Edit Task id:", id]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
             className: "md:mt-0 md:col-span-2",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("form", {
@@ -4256,11 +4264,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var Tasks = function Tasks(_ref) {
   var allTasks = _ref.allTasks,
-      handleDelete = _ref.handleDelete;
+      handleDelete = _ref.handleDelete,
+      handleDuplicate = _ref.handleDuplicate;
   var sorted = allTasks.sort(function (a, b) {
     return new Date(b.created_at) - new Date(a.created_at);
-  });
-  console.log(sorted[0]);
+  }); //console.log(sorted[0]);
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
     className: "Tasks p-4",
     children: sorted.map(function (task) {
@@ -4282,6 +4291,12 @@ var Tasks = function Tasks(_ref) {
           },
           className: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
           children: "Delete"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", {
+          onClick: function onClick() {
+            return handleDuplicate(task.id);
+          },
+          className: "inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+          children: "Duplicate"
         })]
       }, task.id);
     })
